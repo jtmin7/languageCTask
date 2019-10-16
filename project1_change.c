@@ -56,13 +56,23 @@ int getChangeNum(int* stdNumNumber, int* stdNum, int stdNumSize, int *startIndex
 	return changeNum;
 }
 
-void getLeastChangeNum() {
+void showChangNumArray(int* array, int stdNumSize, int* stdNum, int leastChangeNum) {
+	char message[] = "Won";
+	printf("\n");
+	for (int i = 0; i < stdNumSize; i++) {
+		printf("%s[%.3d]: %d \n", message, stdNum[i], array[i]);
+	}
+	printf("least Change Count: %d", leastChangeNum);
+
+}
+
+int getLeastChangeNum(int inputNum, int* stdNum, int stdNumSize, bool showArray) {
 	//**
-	int inputNum = 0;				// 입력 달러
+	//int inputNum = 0;				// 입력 달러
 	//**
-	int stdNum[] = { 250, 120, 100, 50, 10 };	// 기준 달러
+	//int stdNum[] = { 250, 120, 100, 50, 10 };	// 기준 달러
 	//**
-	int stdNumSize = sizeof(stdNum) / sizeof(int);	// 기준 달러 갯수
+	//int stdNumSize = sizeof(stdNum) / sizeof(int);	// 기준 달러 갯수
 	
 	int stdNumNumber[ARRAY_SIZE];			// '기준 달러들의 갯수'
 	int leastChaStdNumNumber[ARRAY_SIZE];	// 최소의 '기준 달러들의 갯수'
@@ -71,15 +81,14 @@ void getLeastChangeNum() {
 
 	int remainNum = 0;
 
-	//**
-	char message[] = "Dollar";
+	
 
 	//**
-	printf("기준 달러 (100달러, 50달러, 20달러, 10달러, 5달러, 1달러) \n");
-	printf("지폐의 매수를 최소화 할 달러를 입력해 주세요. ");
+	//printf("기준 달러 (100달러, 50달러, 20달러, 10달러, 5달러, 1달러) \n");
+	//printf("지폐의 매수를 최소화 할 달러를 입력해 주세요. ");
 
 	//**
-	scanf_s("%d", &inputNum);
+	//scanf_s("%d", &inputNum);
 	
 	
 	int startIndex = 0;
@@ -109,11 +118,11 @@ void getLeastChangeNum() {
 		}
 	}
 
-	for (int i = 0; i < stdNumSize; i++) {
-		printf("%s[%.3d]: %d \n", message, stdNum[i], leastChaStdNumNumber[i]);
-	}
-	printf("%d s(%d)", limitValue, startIndex);
+	//**
+	if(showArray == true)
+	showChangNumArray(leastChaStdNumNumber, stdNumSize, stdNum, limitValue);
 
+	return limitValue;
 }
 
 
@@ -126,6 +135,10 @@ void myFlush() {
 
 
 void repeatFunc() {
+	int inputNum = 0;				// 입력 달러
+	int stdNum[] = { 250, 120, 100, 50, 10 };	// 기준 달러
+	int stdNumSize = sizeof(stdNum) / sizeof(int);	// 기준 달러 갯수
+
 	char menu = '0';
 	do {
 		printf("\n종료하려면 e를 입력해 주세요 ");
@@ -140,10 +153,16 @@ void repeatFunc() {
 		//greedAlgorism();
 		//calculationOfPhoneFee();
 		//calculationOfParkingFee();
-		getLeastChangeNum();
+		printf("기준 원: 250, 120, 100, 50, 10  \n");
+		printf("지폐의 매수를 최소화 할 금액을 입력해 주세요. ");
+		//scanf_s("%d", &inputNum);
+		int array[] = { 100,160,200,50,10,20,30,100,250,170 };
+		for (int i = 0; i < sizeof(array) / sizeof(array[0]); i++) {
+			getLeastChangeNum(array[i], stdNum, stdNumSize, true);
+		}
 	} while (1);
 }
-
+//100,160,200,50,10,20,30,100,250,170
 
 void main(void) {
 	repeatFunc();
